@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jornada do Customer Success — de Júnior a Sênior</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --primary-blue: #1b5ed8;
+        --text-gray: #64748b;
+        --bg-light: #f4f7fb;
+        --border-color: #e2e8f0;
+        --jr: #94a3b8;
+        --pl: #1b5ed8;
+        --sr: #8b5cf6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-light);
+        color: #0f172a;
+        padding: 40px;
+        overflow-x: hidden;
+    }
+
+    /* ===== ESTRUTURA BASE (padrão Contele) ===== */
+    .doc { width:100%; max-width:1100px; margin:0 auto; border-collapse:collapse; }
+    .doc > thead > tr > td, .doc > tbody > tr > td { padding:0; }
+
+    .breadcrumb {
+        color: var(--primary-blue);
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .run-header{
+        display:flex; align-items:center; justify-content:space-between; gap:20px;
+        padding:4px 0 14px; margin-bottom:22px;
+        border-bottom:1px solid var(--border-color);
+    }
+    .run-logo{ height:44px; width:auto; display:block; flex-shrink:0; }
+
+    .changelog-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 60px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+        border: 1px solid var(--border-color);
+    }
+
+    .changelog-header h1 {
+        font-size: 42px;
+        font-weight: 800;
+        color: #111827;
+        margin-bottom: 20px;
+        letter-spacing: -1.2px;
+        line-height: 1.15;
+    }
+    .changelog-header h1 span { color: var(--primary-blue); }
+
+    .changelog-intro {
+        font-size: 17px;
+        color: #475569;
+        line-height: 1.7;
+        margin-bottom: 34px;
+    }
+
+    .new-mod-tag {
+        background: #eff6ff;
+        color: var(--primary-blue);
+        border: 1px solid #bfdbfe;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 4px 11px;
+        border-radius: 20px;
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+    }
+
+    .info-callout{
+        display:flex;gap:12px;align-items:flex-start;
+        background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid var(--primary-blue);
+        border-radius:10px;padding:16px 18px;margin:0 0 34px;color:#334155;font-size:15px;line-height:1.6;
+    }
+    .info-callout i{color:var(--primary-blue);font-size:18px;margin-top:2px;}
+    .info-callout strong{color:#0f172a;}
+
+    .sec{margin-bottom:32px;}
+    .sec p{font-size:15px;color:#334155;line-height:1.75;margin-bottom:12px;}
+    .sec p:last-child{margin-bottom:0;}
+    .sec p strong{color:#0f172a;font-weight:700;}
+
+    .changelog-box h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .changelog-box h3 i { color: var(--primary-blue); }
+
+    .changelog-list { list-style: none; }
+    .changelog-list li {
+        position: relative;
+        padding-left: 28px;
+        margin-bottom: 14px;
+        font-size: 15px;
+        color: #334155;
+        line-height: 1.6;
+    }
+    .changelog-list li:last-child { margin-bottom: 0; }
+    .changelog-list li strong { color: #0f172a; font-weight: 700; }
+
+    .list-check li::before { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; top: 2px; color: #10b981; font-size: 14px; }
+    .list-arrow li::before { content: '\f061'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; top: 2px; color: var(--primary-blue); font-size: 14px; }
+    .list-up li::before    { content: '\f062'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; top: 2px; color: var(--sr); font-size: 14px; }
+    .list-x li::before     { content: '\f00d'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 2px; top: 2px; color: #ef4444; font-size: 15px; }
+
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:32px;}
+
+    /* ===== EIXOS E NÍVEIS ===== */
+    .axis { margin-bottom: 34px; }
+
+    .axis h3 .axis-num {
+        width: 28px; height: 28px; border-radius: 9px;
+        background: #eff6ff; color: var(--primary-blue);
+        font-size: 13px; font-weight: 800;
+        display: inline-flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+    }
+    .axis .axis-note {
+        font-size: 14px; color: #64748b; line-height: 1.6;
+        margin: -6px 0 18px;
+    }
+
+    .level-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+    .level-col {
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 16px 18px 18px;
+        background: #ffffff;
+    }
+    .level-col.jr { border-top: 3px solid var(--jr); }
+    .level-col.pl { border-top: 3px solid var(--pl); background: #fcfdff; }
+    .level-col.sr { border-top: 3px solid var(--sr); }
+
+    .level-tag {
+        display: inline-flex; align-items: center; gap: 6px;
+        font-size: 10px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase;
+        padding: 4px 9px; border-radius: 6px; margin-bottom: 14px;
+    }
+    .jr .level-tag { background: #f1f5f9; color: #475569; }
+    .pl .level-tag { background: #eff6ff; color: var(--pl); }
+    .sr .level-tag { background: #f5f3ff; color: #6d28d9; }
+
+    .level-list { list-style: none; }
+    .level-list li {
+        position: relative; padding-left: 18px; margin-bottom: 11px;
+        font-size: 14px; color: #334155; line-height: 1.55;
+    }
+    .level-list li:last-child { margin-bottom: 0; }
+    .level-list li strong { color: #0f172a; font-weight: 700; }
+    .level-list li::before {
+        content: ''; position: absolute; left: 2px; top: 8px;
+        width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1;
+    }
+    .jr .level-list li::before { background: var(--jr); }
+    .pl .level-list li::before { background: var(--pl); }
+    .sr .level-list li::before { background: var(--sr); }
+
+    /* ===== BLOCO "COMO SE TESTA NA PRÁTICA" ===== */
+    .practice {
+        margin-top: 20px;
+        background: #faf9ff;
+        border: 1px solid #ddd6fe;
+        border-left: 4px solid var(--sr);
+        border-radius: 10px;
+        padding: 16px 18px;
+    }
+    .practice > p { font-size: 14.5px; color: #334155; line-height: 1.65; margin-bottom: 12px; }
+    .practice > p strong { color: #0f172a; }
+    .quote-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; font-size: 14.5px; color: #334155; line-height: 1.55; }
+    .quote-row:last-child { margin-bottom: 0; }
+    .quote-who { font-weight: 800; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
+    .qw-jr { background: #f1f5f9; color: #475569; }
+    .qw-pl { background: #eff6ff; color: var(--pl); }
+    .qw-sr { background: #f5f3ff; color: #6d28d9; }
+
+    /* ===== TABELAS ===== */
+    .tbl-wrap { border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+    table.tbl { width: 100%; border-collapse: collapse; }
+    table.tbl th {
+        background: #f8fafc; text-align: left;
+        font-size: 11.5px; font-weight: 800; letter-spacing: 0.7px; text-transform: uppercase;
+        color: #64748b; padding: 12px 16px; border-bottom: 1px solid var(--border-color);
+    }
+    table.tbl td {
+        padding: 14px 16px; font-size: 14.5px; color: #334155; line-height: 1.55;
+        border-bottom: 1px solid #eef2f7; vertical-align: top;
+    }
+    table.tbl tr:last-child td { border-bottom: none; }
+    table.tbl td.lvl { font-weight: 800; color: #0f172a; white-space: nowrap; }
+    table.tbl td.lvl .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+    .dot-jr { background: var(--jr); } .dot-pl { background: var(--pl); } .dot-sr { background: var(--sr); }
+    table.tbl td.nota { font-weight: 800; color: #0f172a; width: 70px; }
+
+    /* ===== ASSINATURA ===== */
+    .signature{display:flex;align-items:center;gap:14px;margin-top:38px;padding-top:24px;border-top:1px solid var(--border-color);}
+    .sig-avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#388bfd,#1b5ed8);color:#fff;font-weight:800;font-size:17px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .signature .big{color:#0f172a;font-weight:800;font-size:17px;}
+    .signature .muted{color:#64748b;font-size:13.5px;margin-top:2px;}
+
+    @media (max-width: 1200px) {
+        body { padding: 20px; }
+        .changelog-card { padding: 35px; }
+        .two-col { grid-template-columns: 1fr; }
+        .level-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== EXPORTAÇÃO A4 / PDF ===== */
+    @page { size: A4; margin: 16mm 14mm; }
+    @media print {
+        html, body { background:#ffffff !important; padding:0 !important; }
+        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        .doc { max-width: 100% !important; }
+        .run-logo { height: 40px; }
+        .changelog-card { box-shadow: none !important; border: 1px solid var(--border-color); padding: 24px 26px !important; border-radius: 12px; }
+        .changelog-header h1 { font-size: 27px; margin-bottom: 14px; }
+        .changelog-intro { font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
+        .sec { margin-bottom: 20px; }
+        .axis { margin-bottom: 22px; }
+        .sec p, .changelog-list li, .info-callout, .practice > p, .quote-row { font-size: 12.5px !important; }
+        .changelog-box h3 { font-size: 15.5px; margin-bottom: 14px; padding-bottom: 11px; }
+        .level-grid { gap: 12px; }
+        .level-col { padding: 12px 13px 14px; }
+        .level-list li { font-size: 11.5px; margin-bottom: 8px; padding-left: 15px; line-height: 1.45; }
+        .level-list li::before { top: 6px; width: 5px; height: 5px; }
+        .level-tag { font-size: 9px; margin-bottom: 10px; }
+        table.tbl td { font-size: 12px; padding: 10px 12px; }
+        table.tbl th { font-size: 10px; padding: 9px 12px; }
+        .two-col { gap: 26px; margin-bottom: 20px; }
+        .info-callout, .changelog-box, .two-col, .axis, .level-grid, .tbl-wrap, .practice, .signature { break-inside: avoid; page-break-inside: avoid; }
+        h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+    }
+</style>
+</head>
+<body>
+
+<table class="doc">
+    <thead><tr><td>
+        <div class="run-header">
+            <div class="breadcrumb">— DOCUMENTO INTERNO • CUSTOMER SUCCESS</div>
+            <img src="https://i.ibb.co/zTtsVBpq/oie-transparent-37.png" alt="Contele" class="run-logo">
+        </div>
+    </td></tr></thead>
+
+    <tbody><tr><td>
+    <div class="changelog-card">
+
+        <div class="changelog-header">
+            <div style="margin-bottom:16px;">
+                <span class="new-mod-tag"><i class="fa-solid fa-signs-post"></i> Trilha de carreira</span>
+            </div>
+            <h1>Jornada do Customer Success — <span>de Júnior a Sênior</span></h1>
+        </div>
+
+        <p class="changelog-intro">
+            Este documento existe para deixar claro, para toda a equipe, <strong>o que separa um Customer Success Júnior de um Pleno e de um Sênior</strong> aqui na Contele. A proposta é simples: você deve conseguir ler este texto e saber exatamente em que ponto está hoje, o que ainda falta e o que precisa demonstrar para avançar. Sem surpresa em avaliação e sem promoção decidida por critério que ninguém explicou.
+        </p>
+
+        <div class="info-callout">
+            <i class="fa-solid fa-circle-info"></i>
+            <div>
+                <strong>Duas coisas antes de começar.</strong> A jornada é sobre <strong>comportamento, não sobre tempo de casa</strong> — tudo aqui está descrito em termos do que dá para observar no dia a dia: decisões que você toma, conversas que você conduz, problemas que você resolve sozinho. E <strong>ninguém está em um nível só</strong>: é normal estar como Pleno em um assunto e como Júnior em outro. O seu nível é o padrão que você sustenta na maior parte dos assuntos, não o seu melhor dia.
+            </div>
+        </div>
+
+        <div class="changelog-box sec">
+            <h3><i class="fa-solid fa-compass"></i> O que define o seu nível</h3>
+            <p>Senioridade em Customer Success não é tempo de empresa nem tamanho de carteira. Ela responde a duas perguntas: <strong>o que você consegue decidir sozinho?</strong> e <strong>quando você trava, quem você precisa acionar — e com que frequência isso acontece?</strong></p>
+            <p>Tudo o mais que este documento descreve (produto, negócio, dados, relacionamento) são os alicerces que sustentam essas duas respostas. Você não ganha autonomia porque pediu: você ganha autonomia porque conhece o produto, entende o cliente, lê os números e sabe conduzir a conversa. <strong>Autonomia é a consequência, não o ponto de partida.</strong></p>
+            <div class="tbl-wrap" style="margin-top:22px;">
+                <table class="tbl">
+                    <thead>
+                        <tr>
+                            <th style="width:110px;">Nível</th>
+                            <th>Postura</th>
+                            <th>O que você entrega</th>
+                            <th>Até onde você enxerga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="lvl"><span class="dot dot-jr"></span>Júnior</td>
+                            <td>Responde ao que chega até você</td>
+                            <td>Atendimentos e tarefas bem executados</td>
+                            <td>A semana</td>
+                        </tr>
+                        <tr>
+                            <td class="lvl"><span class="dot dot-pl"></span>Pleno</td>
+                            <td>Age antes de ser chamado</td>
+                            <td>O resultado dos clientes da sua carteira</td>
+                            <td>O ciclo até a próxima renovação</td>
+                        </tr>
+                        <tr>
+                            <td class="lvl"><span class="dot dot-sr"></span>Sênior</td>
+                            <td>Aconselha e muda o jogo</td>
+                            <td>O resultado da operação como um todo</td>
+                            <td>O ano e o modelo de atendimento</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- EIXO 1 -->
+        <div class="changelog-box axis">
+            <h3><span class="axis-num">1</span> Autonomia e tomada de decisão</h3>
+            <p class="axis-note">Este é o eixo principal. Os outros seis existem para sustentar este.</p>
+            <div class="level-grid">
+                <div class="level-col jr">
+                    <span class="level-tag">Júnior</span>
+                    <ul class="level-list">
+                        <li>Executa dentro do que já está definido em procedimento</li>
+                        <li>Pergunta antes de agir sempre que a situação foge da rotina</li>
+                        <li>Aciona o gestor ou um colega mais experiente com frequência e logo no início do problema</li>
+                        <li>Tem as comunicações mais delicadas revisadas antes de enviar ao cliente</li>
+                    </ul>
+                </div>
+                <div class="level-col pl">
+                    <span class="level-tag">Pleno</span>
+                    <ul class="level-list">
+                        <li>Decide sozinho tudo o que está previsto em procedimento</li>
+                        <li>Reconhece por conta própria quando a situação saiu do previsto</li>
+                        <li>Ao acionar alguém, chega com o diagnóstico pronto e duas saídas possíveis — não traz o problema cru</li>
+                        <li>Conduz reunião com cliente sem acompanhamento</li>
+                    </ul>
+                </div>
+                <div class="level-col sr">
+                    <span class="level-tag">Sênior</span>
+                    <ul class="level-list">
+                        <li>Decide fora do procedimento quando é necessário e assume o risco da decisão</li>
+                        <li>Transforma a decisão tomada em procedimento novo para os outros</li>
+                        <li>É o destino da escalada dos colegas, não a origem</li>
+                        <li>Negocia exceção comercial ou técnica direto com produto, comercial e diretoria</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="practice">
+                <p><strong>Como se testa isso na prática.</strong> Apresente uma situação real de exceção — um cliente pedindo desconto para renovar, uma falha grave em um cliente grande. A diferença aparece na primeira frase:</p>
+                <div class="quote-row"><span class="quote-who qw-jr">Júnior</span><span>pergunta: “o que eu faço?”</span></div>
+                <div class="quote-row"><span class="quote-who qw-pl">Pleno</span><span>pergunta: “posso fazer assim?”</span></div>
+                <div class="quote-row"><span class="quote-who qw-sr">Sênior</span><span>informa: “vou fazer assim por este motivo; me avisa se você discordar”</span></div>
+            </div>
+        </div>
+
+        <!-- EIXO 2 -->
+        <div class="changelog-box axis">
+            <h3><span class="axis-num">2</span> Domínio do produto</h3>
+            <div class="level-grid">
+                <div class="level-col jr">
+                    <span class="level-tag">Júnior</span>
+                    <ul class="level-list">
+                        <li>Usa as funcionalidades principais e responde às dúvidas mais comuns</li>
+                        <li>Depende do suporte ou do time de produto em configurações complexas</li>
+                    </ul>
+                </div>
+                <div class="level-col pl">
+                    <span class="level-tag">Pleno</span>
+                    <ul class="level-list">
+                        <li>Domina o produto de ponta a ponta, incluindo integrações e limitações</li>
+                        <li>Conhece os caminhos alternativos para quando algo não existe no sistema</li>
+                        <li>Desenha sozinho a melhor configuração para a operação daquele cliente</li>
+                        <li>Traduz necessidade de negócio em configuração dentro do sistema</li>
+                    </ul>
+                </div>
+                <div class="level-col sr">
+                    <span class="level-tag">Sênior</span>
+                    <ul class="level-list">
+                        <li>Conhece o motivo por trás das decisões de produto, não apenas como o sistema funciona</li>
+                        <li>Antecipa o impacto de uma mudança sobre os clientes e avisa antes de virar problema</li>
+                        <li>É procurado pelo time de produto antes das decisões</li>
+                        <li>Gera requisito, em vez de apenas receber o aviso da novidade pronta</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- EIXO 3 -->
+        <div class="changelog-box axis">
+            <h3><span class="axis-num">3</span> Entendimento do negócio do cliente</h3>
+            <div class="level-grid">
+                <div class="level-col jr">
+                    <span class="level-tag">Júnior</span>
+                    <ul class="level-list">
+                        <li>Sabe o ramo de atuação do cliente e quantas licenças ele tem</li>
+                        <li>Descreve o cliente pelas funcionalidades que ele usa</li>
+                    </ul>
+                </div>
+                <div class="level-col pl">
+                    <span class="level-tag">Pleno</span>
+                    <ul class="level-list">
+                        <li>Entende como a operação do cliente funciona na prática</li>
+                        <li>Sabe quem decidiu a compra e quem usa o sistema no dia a dia</li>
+                        <li>Conhece a dor que motivou a contratação</li>
+                        <li>Descreve o cliente pelo resultado esperado, não pelo uso do sistema</li>
+                    </ul>
+                </div>
+                <div class="level-col sr">
+                    <span class="level-tag">Sênior</span>
+                    <ul class="level-list">
+                        <li>Entende como o cliente ganha dinheiro</li>
+                        <li>Sabe qual pressão o responsável pela contratação sofre dentro da empresa dele</li>
+                        <li>Tem noção de quanto custaria para esse cliente trocar de fornecedor</li>
+                        <li>Monta a justificativa de valor em números que o responsável consiga defender com o chefe dele — <strong>é essa conversa, e não a sua, que decide a renovação</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- EIXO 4 -->
+        <div class="changelog-box axis">
+            <h3><span class="axis-num">4</span> Entendimento do negócio da Contele</h3>
+            <div class="level-grid">
+                <div class="level-col jr">
+                    <span class="level-tag">Júnior</span>
+                    <ul class="level-list">
+                        <li>Acompanha os números do próprio painel: atendimentos abertos, indicador de saúde dos clientes, pendências da semana</li>
+                    </ul>
+                </div>
+                <div class="level-col pl">
+                    <span class="level-tag">Pleno</span>
+                    <ul class="level-list">
+                        <li>Entende como a sua carteira afeta os cancelamentos, a receita e o crescimento de licenças</li>
+                        <li>Explica a perda de um cliente pela causa de fundo, não pelo episódio final</li>
+                    </ul>
+                </div>
+                <div class="level-col sr">
+                    <span class="level-tag">Sênior</span>
+                    <ul class="level-list">
+                        <li>Avalia quanto custa atender cada perfil de cliente em relação ao que ele gera</li>
+                        <li>Decide onde vale investir esforço e onde vale reduzir o contato</li>
+                        <li>Enxerga padrão na base inteira, não apenas na própria carteira</li>
+                        <li>Propõe mudança de modelo: como segmentar clientes, como distribuir carteiras, o que mudar na forma de cobrar</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- EIXO 5 -->
+        <div class="changelog-box axis">
+            <h3><span class="axis-num">5</span> Uso de dados e foco em resultado</h3>
+            <div class="level-grid">
+                <div class="level-col jr">
+                    <span class="level-tag">Júnior</span>
+                    <ul class="level-list">
+                        <li>Relata o que aconteceu</li>
+                        <li>Levanta os dados quando alguém pede</li>
+                    </ul>
+                </div>
+                <div class="level-col pl">
+                    <span class="level-tag">Pleno</span>
+                    <ul class="level-list">
+                        <li>Usa os dados para priorizar a própria semana</li>
+                        <li>Explica por que determinado cliente entra na frente dos outros</li>
+                        <li>Percebe queda de uso antes de o cliente reclamar e age em cima disso</li>
+                    </ul>
+                </div>
+                <div class="level-col sr">
+                    <span class="level-tag">Sênior</span>
+                    <ul class="level-list">
+                        <li>Levanta hipótese a partir dos dados e vai atrás de testá-la</li>
+                        <li>Transforma a análise em proposta concreta de decisão — por exemplo: clientes que não ativam determinado recurso nos primeiros 90 dias cancelam bem mais, então vale mudar a implantação</li>
+                        <li>Sustenta o número quando é questionado em reunião com a diretoria</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- EIXO 6 -->
+        <div class="changelog-box axis">
+            <h3><span class="axis-num">6</span> Relacionamento e comunicação</h3>
+            <div class="level-grid">
+                <div class="level-col jr">
+                    <span class="level-tag">Júnior</span>
+                    <ul class="level-list">
+                        <li>Constrói boa relação com quem usa o sistema no dia a dia</li>
+                        <li>Comunica-se de forma clara e educada</li>
+                        <li>Ainda hesita ou pede ajuda diante de uma conversa difícil</li>
+                    </ul>
+                </div>
+                <div class="level-col pl">
+                    <span class="level-tag">Pleno</span>
+                    <ul class="level-list">
+                        <li>Conduz cobrança, negativa e reclamação sem precisar escalar</li>
+                        <li>Assume diante do cliente o erro que foi da Contele</li>
+                        <li>Constrói relação também com quem decide, não apenas com quem opera</li>
+                        <li>Sabe dizer não sem estremecer a relação</li>
+                    </ul>
+                </div>
+                <div class="level-col sr">
+                    <span class="level-tag">Sênior</span>
+                    <ul class="level-list">
+                        <li>Circula com tranquilidade em conversa com a diretoria do cliente</li>
+                        <li>Assume situação crítica — ameaça de cancelamento, falha grave — sem perder a conta e sem prometer o que a empresa não vai entregar</li>
+                        <li>Influencia áreas internas sobre as quais não tem nenhuma autoridade formal</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- EIXO 7 -->
+        <div class="changelog-box axis">
+            <h3><span class="axis-num">7</span> Método, organização e desenvolvimento de outras pessoas</h3>
+            <div class="level-grid">
+                <div class="level-col jr">
+                    <span class="level-tag">Júnior</span>
+                    <ul class="level-list">
+                        <li>Segue o processo definido</li>
+                        <li>Avisa quando o processo não funciona na prática</li>
+                    </ul>
+                </div>
+                <div class="level-col pl">
+                    <span class="level-tag">Pleno</span>
+                    <ul class="level-list">
+                        <li>Melhora o processo dentro da própria rotina</li>
+                        <li>Deixa a melhoria registrada para os outros usarem</li>
+                        <li>Ajuda colegas em dúvidas pontuais</li>
+                    </ul>
+                </div>
+                <div class="level-col sr">
+                    <span class="level-tag">Sênior</span>
+                    <ul class="level-list">
+                        <li>Cria processo que a equipe inteira passa a usar</li>
+                        <li>Acompanha quem está começando, revisa trabalho e conduz treinamento</li>
+                        <li>Reduz a dependência que o time tem dele — <strong>este é o teste final:</strong> sênior que virou gargalo não é sênior, é ponto único de falha. Se a operação trava quando ele tira férias, ainda falta um passo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SINAIS -->
+        <div class="changelog-box sec">
+            <h3><i class="fa-solid fa-flag-checkered"></i> Sinais de que você está pronto para o próximo nível</h3>
+            <p>São sinais observáveis, não sensação. Para mudar de nível, espera-se <strong>evidência concreta em pelo menos cinco dos sete eixos</strong> do nível pretendido — e o eixo de autonomia é obrigatório em qualquer caso.</p>
+        </div>
+
+        <div class="two-col">
+            <div class="changelog-box">
+                <h3><i class="fa-solid fa-arrow-trend-up"></i> De Júnior para Pleno</h3>
+                <ul class="changelog-list list-check">
+                    <li>Conduziu sozinho um ciclo completo até a renovação de um cliente</li>
+                    <li>A frequência com que você pede ajuda caiu, e a natureza do pedido mudou: saiu do <strong>“como eu faço?”</strong> para o <strong>“valido isso com você”</strong></li>
+                    <li>Conduziu ao menos uma conversa difícil sem apoio e manteve a relação com o cliente</li>
+                    <li>Consegue explicar a dor de negócio de cada cliente da sua carteira sem precisar consultar registro</li>
+                    <li>Antecipou pelo menos um risco de cancelamento antes de o sinal ficar óbvio para todo mundo</li>
+                </ul>
+            </div>
+            <div class="changelog-box">
+                <h3><i class="fa-solid fa-arrow-trend-up"></i> De Pleno para Sênior</h3>
+                <ul class="changelog-list list-up">
+                    <li>Colegas passaram a procurar você como referência, de forma espontânea e recorrente</li>
+                    <li>Criou ou reformulou um processo que a equipe adotou de fato</li>
+                    <li>Levou uma análise sua que mudou uma decisão de produto ou de operação</li>
+                    <li>Assumiu uma conta crítica ou uma situação de crise, e o resultado foi bom</li>
+                    <li>Desenvolveu alguém, e dá para apontar o que aquela pessoa passou a fazer depois</li>
+                    <li>Sustenta um argumento contrário ao da diretoria com dado na mão, e mantém a posição quando está certo</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- O QUE NÃO DEFINE -->
+        <div class="changelog-box sec">
+            <h3><i class="fa-solid fa-ban"></i> O que não define senioridade</h3>
+            <p>Vale deixar explícito, porque é aqui que mora a maior parte das dúvidas:</p>
+            <ul class="changelog-list list-x" style="margin-top:16px;">
+                <li>Tempo de casa</li>
+                <li>Quantidade de clientes na carteira</li>
+                <li>Volume de atendimentos realizados</li>
+                <li>Ser a pessoa mais querida pelos clientes</li>
+                <li>Ser quem mais trabalha ou quem responde mais rápido</li>
+                <li>Operar o sistema melhor que todo mundo — isso é domínio de ferramenta, e é o mínimo esperado de um Pleno</li>
+            </ul>
+            <p style="margin-top:16px;">Nada disso é ruim. Só não é o que decide a mudança de nível.</p>
+        </div>
+
+        <!-- AVALIAÇÃO -->
+        <div class="changelog-box sec">
+            <h3><i class="fa-solid fa-clipboard-check"></i> Como a avaliação acontece</h3>
+            <p><strong>Quando.</strong> Avaliação formal a cada seis meses, com uma conversa mais leve de acompanhamento a cada três meses. Ninguém deve descobrir na avaliação formal algo que já era percebido há meses.</p>
+            <p><strong>Como se mede.</strong> Cada um dos sete eixos recebe uma nota de 1 a 4. O seu nível é o padrão que você sustenta ao longo do semestre, não o seu melhor momento isolado.</p>
+            <div class="tbl-wrap" style="margin:20px 0 22px;">
+                <table class="tbl">
+                    <thead>
+                        <tr><th style="width:70px;">Nota</th><th>Significado</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="nota">1</td><td>Ainda não demonstra</td></tr>
+                        <tr><td class="nota">2</td><td>Demonstra com apoio de alguém</td></tr>
+                        <tr><td class="nota">3</td><td>Demonstra sozinho, de forma consistente</td></tr>
+                        <tr><td class="nota">4</td><td>Demonstra e ensina outras pessoas</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><strong>De onde vem a evidência.</strong> Autoavaliação, avaliação do gestor, duas situações concretas por eixo e a leitura dos números da sua carteira. Vale muito a pena ir anotando essas situações ao longo do semestre, em vez de tentar lembrar de tudo na véspera.</p>
+            <p><strong>A regra principal.</strong> A promoção acontece quando a pessoa já está atuando no nível seguinte há pelo menos um semestre. Promoção aqui reconhece o que já está acontecendo — não é uma aposta no que pode vir a acontecer.</p>
+        </div>
+
+        <div class="signature">
+            <span class="sig-avatar">P</span>
+            <div>
+                <div class="big">Produto</div>
+                <div class="muted">Dúvidas sobre o seu nível ou a sua avaliação: fale com o seu gestor direto.</div>
+            </div>
+        </div>
+
+    </div>
+    </td></tr></tbody>
+</table>
+
+</body>
+</html>
